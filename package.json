@@ -1,0 +1,9 @@
+{
+  "name": "nexa-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Site Nexa Minecraft avec API et mises a jour temps reel par SSE",
+  "type": "module",
+  "scripts": { "start": "node backend/server.js", "dev": "node --watch backend/server.js" },
+  "engines": { "node": ">=20" }
+}
