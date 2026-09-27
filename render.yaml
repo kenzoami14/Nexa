@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: nexa-web
-    runtime: docker
-    plan: free
-    healthCheckPath: /api/health
