@@ -30,7 +30,7 @@ const server = http.createServer(async (req, res) => {
   }
   if (url.pathname.startsWith('/api/launcher/manifest/')) {
     const item = servers.find((entry) => entry.id === url.pathname.split('/').pop());
-    return item ? json(res, { schemaVersion: 1, serverId: item.id, name: item.name, minecraft: item.version, loader: { name: item.loader.split(' ')[0].toLowerCase(), version: item.loader.split(' ').slice(1).join(' ') || item.version }, modpack: { name: item.pack, version: item.packVersion, manifestUrl: null }, serverAddress: item.address, files: [], generatedAt: new Date().toISOString() }) : json(res, { error: 'Serveur introuvable' }, 404);
+    return item ? json(res, { schemaVersion: 1, serverId: item.id, name: item.name, minecraft: item.version, loader: { name: item.loaderName, version: item.loaderVersion }, modpack: { name: item.pack, version: item.packVersion, manifestUrl: null }, serverAddress: item.address, files: [], generatedAt: new Date().toISOString() }) : json(res, { error: 'Serveur introuvable' }, 404);
   }
   if (url.pathname === '/api/events') {
     res.writeHead(200, { 'Content-Type': 'text/event-stream; charset=utf-8', 'Cache-Control': 'no-cache, no-transform', Connection: 'keep-alive', 'Access-Control-Allow-Origin': '*' });
@@ -46,13 +46,7 @@ const server = http.createServer(async (req, res) => {
   } catch { json(res, { error: 'Ressource introuvable' }, 404); }
 });
 
-// Le jeu de démonstration simule une variation de joueurs pour valider le flux live.
-setInterval(() => {
-  const online = servers.filter((item) => item.status === 'online');
-  const item = online[Math.floor(Math.random() * online.length)];
-  if (item) item.players = Math.max(0, Math.min(item.maxPlayers, item.players + (Math.random() > 0.48 ? 1 : -1)));
-  broadcast();
-}, 12000).unref();
+// L’API SSE reste prête à diffuser l’état réel lorsqu’une source Minecraft sera connectée.
 setInterval(() => { for (const client of clients) client.write(': keep-alive\n\n'); }, 20000).unref();
 
 server.listen(port, '0.0.0.0', () => console.log(`Nexa disponible sur http://localhost:${port}`));

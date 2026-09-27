@@ -1,6 +1,6 @@
 # Nexa — site communauté Minecraft
 
-Une première version déployable du portail Nexa, avec une interface responsive, une API HTTP et des mises à jour instantanées via Server-Sent Events (SSE). Le jeu de données est simulé et ne contacte aucun serveur Minecraft réel.
+Le portail Nexa est organisé en trois rubriques : Accueil, Serveurs et Actualités. Le site est responsive et livré avec une API HTTP ainsi qu’un flux temps réel SSE, prêt à recevoir l’état d’une véritable API Minecraft.
 
 ## Démarrer
 
@@ -10,28 +10,32 @@ Prérequis : Node.js 20 ou plus récent. Aucune dépendance à installer.
 npm start
 ```
 
-Ouvrir [http://localhost:3000](http://localhost:3000). Pour le rechargement automatique en développement : `npm run dev`.
+Ouvrir [http://localhost:3000](http://localhost:3000).
 
 ## Organisation
 
-- `frontend/` — site servi directement, sans étape de compilation.
-- `backend/server.js` — serveur HTTP, API JSON, flux live SSE et fichiers statiques.
-- `backend/servers.js` — données de démonstration à remplacer par une source réelle.
+- `frontend/` — site web responsive.
+- `backend/server.js` — serveur HTTP, API JSON, flux SSE et fichiers statiques.
+- `backend/servers.js` — configuration initiale de Poké'Nexa.
+
+## Serveur configuré
+
+- Adresse : `90.12.207.74`
+- Minecraft : `1.21.1`
+- Loader : Fabric
+
+Les valeurs de statut et de joueurs ne sont pas simulées : elles restent inconnues jusqu’au branchement d’une source Minecraft réelle.
 
 ## API
 
 - `GET /api/health` — santé du service.
-- `GET /api/servers` — liste des serveurs et informations publiques.
+- `GET /api/servers` — liste et configuration publique des serveurs.
 - `GET /api/servers/:id` — détail d’un serveur.
-- `GET /api/events` — flux SSE; l’événement `servers` transmet l’état complet toutes les 12 secondes.
-- `GET /api/launcher/manifest/:id` — manifeste versionné destiné au futur launcher Nexa Desktop.
-
-Le client utilise `EventSource`, qui gère la reconnexion automatiquement. SSE permet ici des mises à jour temps réel du serveur vers les navigateurs. Une future communication bidirectionnelle avec le launcher pourra ajouter un endpoint WebSocket sans changer le format des données (`schemaVersion`, `serverId`, versions, modpack et adresse).
+- `GET /api/events` — flux SSE, prêt à pousser les changements d’état.
+- `GET /api/launcher/manifest/:id` — manifeste destiné au futur launcher Nexa Desktop.
 
 ## Déploiement
 
-Le `Dockerfile` est prêt pour les plateformes acceptant Docker. Le fichier `render.yaml` permet aussi un déploiement Render depuis le dépôt. Le service écoute le port fourni dans `PORT` et expose `/api/health` pour le contrôle de santé. Pour publier le projet, connecter le dépôt à Render et lancer le déploiement du service.
+Le `Dockerfile` et `render.yaml` sont inclus. Le service écoute le port transmis dans `PORT`; `/api/health` peut servir de contrôle de santé. Le frontend et le backend sont hébergés ensemble par le service Node, tout en restant séparés dans deux dossiers.
 
-## Avant la mise en production
-
-Remplacer les données dans `backend/servers.js` par l’état d’une API Minecraft ou d’une base de données; relier les manifestes aux fichiers de modpack réellement hébergés; configurer le domaine et le HTTPS sur la plateforme. Le bouton « Se connecter » copie l’adresse du serveur : le navigateur ne peut pas lancer Minecraft directement sans le launcher desktop. Le formulaire « Être informé » est un lien de contact de démonstration.
+Le bouton « Copier l’adresse » copie l’IP du serveur. Un site web ne peut pas démarrer Minecraft directement : cela nécessitera plus tard le launcher Nexa Desktop.

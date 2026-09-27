@@ -1,50 +1,68 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101117"><meta name="description" content="Le portail Nexa Launcher : tes mondes Minecraft, leur statut et leurs modpacks.">
-  <title>Nexa Launcher</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101117">
+  <meta name="description" content="Le portail officiel Nexa et son serveur Minecraft Poké'Nexa.">
+  <title>Nexa Launcher — Poké'Nexa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <div class="app">
+  <div class="app-shell">
     <aside class="sidebar">
-      <a class="brand" href="#accueil" aria-label="Nexa Launcher, accueil"><img class="brand-logo" src="/assets/logo.png" alt="Nexa"></a>
-      <div class="nav-label">Espace joueur</div>
-      <nav class="nav" aria-label="Navigation principale">
-        <button class="active" data-page="Accueil"><span class="ico">⌂</span><span>Accueil</span></button>
-        <button data-page="Serveurs"><span class="ico">◈</span><span>Serveurs</span></button>
-        <button data-page="Actualités"><span class="ico">◷</span><span>Actualités</span></button>
-        <button data-page="Modpacks"><span class="ico">▦</span><span>Modpacks</span></button>
+      <a class="brand" href="#accueil" data-page="Accueil" aria-label="Nexa Launcher, accueil">
+        <img src="/assets/logo.png" alt="Nexa Launcher">
+      </a>
+      <p class="nav-label">Espace joueur</p>
+      <nav class="navigation" aria-label="Navigation principale">
+        <button class="nav-item active" data-page="Accueil"><span class="nav-icon" aria-hidden="true">⌂</span>Accueil</button>
+        <button class="nav-item" data-page="Serveurs"><span class="nav-icon" aria-hidden="true">◇</span>Serveurs</button>
+        <button class="nav-item" data-page="Actualités"><span class="nav-icon" aria-hidden="true">◷</span>Actualités</button>
       </nav>
-      <div class="side-bottom">
-        <div class="community"><b>La communauté Nexa</b><p>Une aventure, des rencontres et des mondes à découvrir.</p></div>
-        <div class="profile"><div class="avatar">N</div><div><strong>Joueur Nexa</strong><small>Portail communautaire</small></div></div>
-      </div>
+      <aside class="community-card">
+        <strong>La communauté Nexa</strong>
+        <p>Une aventure, des rencontres et des mondes à découvrir.</p>
+      </aside>
     </aside>
-    <main>
-      <header class="top"><div class="crumb">Nexa Launcher <span>/</span> <b id="breadcrumb">Accueil</b></div><div class="top-right"><div class="connection"><i class="live-dot"></i><span id="live-indicator">Connexion…</span></div><button class="iconbtn" aria-label="Notifications">♧</button></div></header>
-      <section id="homeView">
-        <section class="hero">
-          <div class="hero-content"><div class="eyebrow">✦ Actualités de la communauté <span class="pill">CETTE SEMAINE</span></div><h1>Actus de la semaine</h1><p>Poké’Nexa prend forme. Les informations sur le pack et l’ouverture du serveur seront annoncées ici.</p><div class="actions"><button class="primary" id="serversShortcut">Voir Poké’Nexa <span>↗</span></button><span class="meta"><i class="live-dot"></i>Les mondes Nexa t’attendent</span></div></div>
-          <div class="hero-decoration" aria-hidden="true"><span class="hero-orbit"></span><span class="hero-spark">✦</span><span class="hero-spark second">✧</span></div>
-        </section>
-        <div class="section-head"><div><h2>Tes mondes</h2><p>Retrouve les serveurs de la communauté Nexa.</p></div><button class="text-button" data-open-servers>Voir tous les serveurs ↗</button></div>
-        <div class="home-grid"><div id="home-server-list" class="home-server-list" aria-live="polite"></div><aside class="home-feature"><div class="feature-art"><img src="/assets/pokenexa-logo.png" alt="Poké'Nexa"><span class="feature-tag"><i class="live-dot"></i> L’AVENTURE POKÉMON</span></div><div class="feature-body"><div class="eyebrow">À DÉCOUVRIR</div><h3>Poké’Nexa</h3><p>Un monde ouvert, tes Pokémon préférés et une aventure à partager.</p><div class="feature-stats"><span><b id="home-online-count">—</b><small>SERVEUR(S) EN LIGNE</small></span><span><b id="home-player-count">—</b><small>JOUEURS CONNECTÉS</small></span></div><button class="secondary" data-open-servers>Explorer les mondes <span>↗</span></button></div></aside></div>
-        <p class="bottom-note"><i class="live-dot"></i> Les statuts et joueurs sont actualisés en direct.</p>
+
+    <main class="main-area">
+      <header class="mobile-heading"><img src="/assets/logo.png" alt="Nexa Launcher"><span>Portail joueur</span></header>
+      <div class="page-meta"><div class="breadcrumb">Nexa Launcher <span>/</span> <strong id="breadcrumb">Accueil</strong></div><span class="server-count">1 serveur</span></div>
+
+      <section id="homeView" class="page-view">
+        <article class="welcome-panel">
+          <div class="welcome-copy">
+            <div class="eyebrow"><span>✦</span> Actualités de la communauté <span class="pill">CETTE SEMAINE</span></div>
+            <h1>Actus de la semaine</h1>
+            <p>Poké'Nexa prend forme. Les informations sur le serveur et son ouverture seront annoncées ici.</p>
+            <button class="primary-button" data-go="Serveurs">Voir Poké'Nexa <span aria-hidden="true">↗</span></button>
+          </div>
+          <div class="welcome-mark" aria-hidden="true"><img src="/assets/pokenexa-logo.png" alt=""></div>
+        </article>
+        <p class="signature">Nexa Launcher par Kenzo</p>
       </section>
-      <section id="serversView" hidden>
-        <div class="servers-banner"><div class="banner-shade"></div><div class="banner-copy"><div class="eyebrow">NEXA COMMUNITY <span class="pill">MONDES CONNECTÉS</span></div><h1>Choisis ton aventure.</h1><p>Une communauté, des univers différents. Trouve le monde qui te ressemble.</p></div><img src="/assets/pokenexa-logo.png" alt="Poké'Nexa" class="banner-logo"></div>
-        <div class="section-head server-heading"><div><h2>Serveurs</h2><p>Statut, joueurs, versions Minecraft et modpacks.</p></div><div class="connection"><i class="live-dot"></i><span>Mis à jour en direct</span></div></div>
-        <div class="filters" role="group" aria-label="Filtrer les serveurs"><button class="filter active" data-filter="all">Tous <span id="count-all">04</span></button><button class="filter" data-filter="online">En ligne</button><button class="filter" data-filter="Aventure">Aventure</button><button class="filter" data-filter="Survie">Survie</button><button class="filter" data-filter="Roleplay">Roleplay</button><button class="filter" data-filter="Communauté">Communauté</button></div>
-        <div id="server-list" class="server-list" aria-live="polite"></div>
-        <p class="bottom-note">Nexa Launcher par Kenzo</p>
+
+      <section id="serversView" class="page-view" hidden>
+        <div class="section-intro"><div class="eyebrow">LE MONDE NEXA</div><h1>Serveurs</h1><p>Retrouve ici les informations pour rejoindre notre univers.</p></div>
+        <div id="server-list" class="server-list" aria-live="polite"><div class="empty-state">Chargement de Poké'Nexa…</div></div>
+      </section>
+
+      <section id="newsView" class="page-view" hidden>
+        <div class="section-intro"><div class="eyebrow">RESTE INFORMÉ</div><h1>Actualités</h1><p>Les nouvelles de la communauté Nexa seront publiées ici.</p></div>
+        <article class="news-card">
+          <div class="news-card-top"><span class="news-category">COMMUNAUTÉ</span><span class="news-date">Cette semaine</span></div>
+          <h2>Poké'Nexa prend forme</h2>
+          <p>Les informations sur le serveur et son ouverture seront annoncées ici. Reviens bientôt pour découvrir les nouveautés.</p>
+          <button class="text-link" data-go="Serveurs">Découvrir le serveur <span aria-hidden="true">↗</span></button>
+        </article>
       </section>
     </main>
   </div>
-  <div id="toast" class="toast" role="status"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script type="module" src="/app.js"></script>
 </body>
 </html>
